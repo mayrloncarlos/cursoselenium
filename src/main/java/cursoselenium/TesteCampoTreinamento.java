@@ -30,7 +30,7 @@ public class TesteCampoTreinamento {
 	
 	@After
 	public void finaliza() {
-		driver.quit();
+//		driver.quit();
 	}
 
 	@Test

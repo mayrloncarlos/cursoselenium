@@ -12,6 +12,7 @@ public class TesteAlert {
 
 	private WebDriver driver;
 	private DSL dsl;
+	private AlertPage page;
 
 	@Before
 	public void inicializa() {
@@ -20,6 +21,7 @@ public class TesteAlert {
 		driver.manage().window().maximize();
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		dsl = new DSL(driver);
+		page = new AlertPage(driver);
 	}
 	
 	@After
@@ -30,7 +32,7 @@ public class TesteAlert {
 	@Test
 	public void deveInteragirComAlertSimples() {
 
-		dsl.clicar("alert");
+		page.clicar("alert");
 		String texto = dsl.alertaObterTextoEAceita();
 		assertEquals("Alert Simples", texto);
 		
