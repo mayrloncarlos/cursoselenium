@@ -1,7 +1,6 @@
 package cursoselenium;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,14 +38,14 @@ public class TesteCadastro {
 		page.setSugestao("Nenhuma sugestão");
 		page.cadastrar();
 		
-		assertTrue(page.obterResultadoCadastro().startsWith("Cadastrado!"));
-		assertEquals("Nome: Mayrlon", page.obterNomeCadastro());
-		assertEquals("Sobrenome: Carlos", page.obterSobrenomeCadastro());
-		assertEquals("Sexo: Masculino", page.obterSexoCadastro());
-		assertEquals("Comida: Frango", page.obterComidaCadastro());
-		assertEquals("Escolaridade: superior", page.obterEscolaridadeCadastro());
-		assertEquals("Esportes: Corrida", page.obterEsporteCadastro());
-		assertEquals("Sugestoes: Nenhuma sugestão", page.obterSugestaoCadastro());
+		assertEquals("Cadastrado!", page.obterResultadoCadastro());
+		assertEquals("Mayrlon", page.obterNomeCadastro());
+		assertEquals("Carlos", page.obterSobrenomeCadastro());
+		assertEquals("Masculino", page.obterSexoCadastro());
+		assertEquals("Frango", page.obterComidaCadastro());
+		assertEquals("superior", page.obterEscolaridadeCadastro());
+		assertEquals("Corrida", page.obterEsporteCadastro());
+		assertEquals("Nenhuma sugestão", page.obterSugestaoCadastro());
 
 	}
 }
