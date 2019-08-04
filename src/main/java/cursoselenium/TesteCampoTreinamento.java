@@ -125,4 +125,9 @@ public class TesteCampoTreinamento {
 		assertEquals("Cuidado onde clica, muitas armadilhas...", dsl.obterTexto(By.className("facilAchar")));
 		
 	}
+	
+	@Test
+	public void deveClicaBotaoTabela() {
+		dsl.clicarBotaoTabela("Nome", "Maria", "Botao", "elementosForm:tableUsuarios");
+	}
 }
