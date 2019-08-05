@@ -1,34 +1,27 @@
-package cursoselenium;
+package br.ce.wcaquino.test;
 
+import static br.ce.wcaquino.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TesteAlert {
+import br.ce.wcaquino.core.BaseTest;
+import br.ce.wcaquino.core.DSL;
+import br.ce.wcaquino.page.AlertPage;
 
-	private WebDriver driver;
+public class TesteAlert extends BaseTest {
+
 	private DSL dsl;
 	private AlertPage page;
 
 	@Before
 	public void inicializa() {
-//		WebDriver driver = new FirefoxDriver();
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		dsl = new DSL(driver);
-		page = new AlertPage(driver);
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
+		page = new AlertPage();
 	}
 	
-	@After
-	public void finaliza() {
-		driver.quit();
-	}
-
 	@Test
 	public void deveInteragirComAlertSimples() {
 

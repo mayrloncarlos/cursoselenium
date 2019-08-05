@@ -1,15 +1,10 @@
-package cursoselenium;
+package br.ce.wcaquino.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-public class CampoTreinamentoPage {
+import br.ce.wcaquino.core.BasePage;
 
-	private DSL dsl;
-	
-	public CampoTreinamentoPage(WebDriver driver) {
-		dsl = new DSL(driver);
-	}
+public class CampoTreinamentoPage extends BasePage {
 	
 	public void setNome(String nome) {
 		dsl.escreve("elementosForm:nome", nome);

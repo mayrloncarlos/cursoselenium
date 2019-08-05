@@ -1,32 +1,24 @@
-package cursoselenium;
+package br.ce.wcaquino.test;
 
+import static br.ce.wcaquino.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TesteFramesEJanelas {
+import br.ce.wcaquino.core.BaseTest;
+import br.ce.wcaquino.core.DSL;
+
+public class TesteFramesEJanelas extends BaseTest {
 	
-	private WebDriver driver;
 	private DSL dsl;
 
 	@Before
 	public void inicializa() {
-//		WebDriver driver = new FirefoxDriver();
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		dsl = new DSL(driver);
-	}
-	
-	@After
-	public void finaliza() {
-		driver.quit();
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
 	}
 
 
@@ -48,7 +40,7 @@ public class TesteFramesEJanelas {
 		dsl.clicar("buttonPopupEasy");
 		dsl.trocarJanela("Popup");
 		dsl.escreve(By.tagName("textarea"), "Deu certo?");
-		driver.close();
+		getDriver().close();
 		dsl.trocarJanela("");
 		dsl.escreve(By.tagName("textarea"), "E agora?");
 		
@@ -56,7 +48,7 @@ public class TesteFramesEJanelas {
 	
 	@Test
 	public void deveInteragirComFrameEscondido() {
-		WebElement frame = driver.findElement(By.id("frame2"));
+		WebElement frame = getDriver().findElement(By.id("frame2"));
 		dsl.executarJS("window.scrollBy(0, arguments[0])", frame.getLocation().y);
 		dsl.entrarFrame("frame2");
 		dsl.clicar("frameButton");
@@ -69,9 +61,9 @@ public class TesteFramesEJanelas {
 	public void deveInteragirComJanelasSemTitulo() {
 		
 		dsl.clicar("buttonPopupHard");
-		dsl.trocarJanela((String) driver.getWindowHandles().toArray()[1]);
+		dsl.trocarJanela((String) getDriver().getWindowHandles().toArray()[1]);
 		dsl.escreve(By.tagName("textarea"), "Deu certo?");
-		dsl.trocarJanela((String) driver.getWindowHandles().toArray()[0]);
+		dsl.trocarJanela((String) getDriver().getWindowHandles().toArray()[0]);
 		dsl.escreve(By.tagName("textarea"), "E agora?");
 		
 	}

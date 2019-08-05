@@ -1,31 +1,24 @@
-package cursoselenium;
+package br.ce.wcaquino.test;
 
+import static br.ce.wcaquino.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TesteCadastro {
+import br.ce.wcaquino.core.BaseTest;
+import br.ce.wcaquino.page.CampoTreinamentoPage;
 
-	private WebDriver driver;
+public class TesteCadastro extends BaseTest {
+
 	private CampoTreinamentoPage page;
 
 	@Before
 	public void inicializa() {
-//		WebDriver driver = new FirefoxDriver();
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		page = new CampoTreinamentoPage(driver);
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		page = new CampoTreinamentoPage();
 	}
 	
-	@After
-	public void finaliza() {
-		driver.quit();
-	}
 
 	@Test
 	public void deveCadastrarUmUsuario() {

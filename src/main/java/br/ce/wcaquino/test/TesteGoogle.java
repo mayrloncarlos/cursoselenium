@@ -1,4 +1,4 @@
-package cursoselenium;
+package br.ce.wcaquino.test;
 
 import org.junit.Assert;
 import org.junit.Test;
