@@ -18,6 +18,8 @@ public class DSL {
 		this.driver = driver;
 	}
 
+	/********* TextField e TextArea ************/
+	
 	public void escreve(By by, String texto) {
 		driver.findElement(by).clear();
 		driver.findElement(by).sendKeys(texto);
@@ -31,13 +33,21 @@ public class DSL {
 		return driver.findElement(By.id(idCampo)).getAttribute("value");
 	}
 	
+	/********* Botao, Radio e Check ************/
+	
 	public void clicar(String id) {
-		driver.findElement(By.id(id)).click();
+		clicar(By.id(id));
+	}
+	
+	public void clicar(By by) {
+		driver.findElement(by).click();
 	}
 	
 	public boolean isMarcado(String id) {
 		return driver.findElement(By.id(id)).isSelected();
 	}
+	
+	/********* Combo ************/
 	
 	public void selecionarCombo(String id, String valor) {
 		WebElement element = driver.findElement(By.id(id));
@@ -87,9 +97,24 @@ public class DSL {
 		return false;
 	}
 	
+	@SuppressWarnings("static-access")
+	public void selecionarComboPrime(String radicalAbrirCombo, String radicalSelecionarCombo, String valor) {
+		clicar(By.xpath("//*[@id='"+radicalAbrirCombo+"']/../..//span"));
+		try {
+			new Thread().sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		clicar(By.xpath("//*[@id='"+radicalSelecionarCombo+"' and .='"+valor+"']"));
+	}
+	
+	/********* Link ************/
+	
 	public void clicarLink(String link) {
 		driver.findElement(By.linkText(link)).click();
 	}
+	
+	/********* Textos ************/
 	
 	public String obterTexto(By by) {
 		return driver.findElement(by).getText();
@@ -98,6 +123,8 @@ public class DSL {
 	public String obterTexto(String id) {
 		return obterTexto(By.id(id));
 	}
+	
+	/********* Alerts ************/
 	
 	public String alertaObterTexto() {
 		Alert alert = driver.switchTo().alert();
@@ -124,6 +151,8 @@ public class DSL {
 		alert.accept();
 	}
 	
+	/********* Frames e Janelas ************/
+	
 	public void entrarFrame(String id) {
 		driver.switchTo().frame(id);
 	}
@@ -136,10 +165,14 @@ public class DSL {
 		driver.switchTo().window(id);
 	}
 	
+	/************** JS *********************/
+	
 	public Object executarJS(String cmd, Object... param) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		return js.executeScript(cmd, param);
 	}
+	
+	/************** Tabela *********************/
 	
 	public void clicarBotaoTabela(String colunaBusca, String valor, String colunaBotao, String idTabela) {
 		
